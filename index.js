@@ -4,6 +4,8 @@ const port = 5000
 const bodyParser = require('body-parser');
 const{User} = require("./models/User"); 
 
+const config = require('./models/User');
+
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -11,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 const mongoose = require('mongoose')
-mongoose.connect('mongodb+srv://osmin80:tmdals80@boilerplate.b6ajz9s.mongodb.net/?retryWrites=true&w=majority',{
+mongoose.connect(config.mongoURI,{
     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
 }).then(()=> console.log('MongoDB Connected...'))
 .catch(err =>console.log(err))
@@ -20,7 +22,7 @@ mongoose.connect('mongodb+srv://osmin80:tmdals80@boilerplate.b6ajz9s.mongodb.net
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World! 안녕하세요~!~! 새해 복 많이 받으세요.')
+  res.send('Hello World! 안녕하세요~!~!')
 })
 
 app.post('/requester', (req, res) => {
